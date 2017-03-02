@@ -68,6 +68,7 @@ class Login extends CI_Controller {
 		$this->email->subject('Nova Senha de Acesso');
 		$this->email->message('Est  sua nova senha de acesso :'.$senhaUsuario);
 		$this->email->send();
+		
 	}
 
 	
