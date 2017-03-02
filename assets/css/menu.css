@@ -1,0 +1,63 @@
+#menu{
+	padding: 0;
+	background-color: #1D1D1B;
+	margin: 0;
+}
+#menu li{
+	list-style: none;
+	border-bottom: 1px solid #333;
+}
+.menu-bt{
+	display: block;
+	color: #fff;
+	position: relative;
+	line-height: 40px;
+	text-indent: 45px;
+	width: 100%;
+}
+.menu-bt:hover{
+	background: #333;
+	text-decoration: none;
+	color: #fff;
+}
+.menu-bt:active{
+	background: #c00;
+}
+
+@media (min-width: 768px) {
+	#menu li{
+		margin-right: 15px;
+        text-indent: 30px;
+	}
+	.container-fluid#home a#home::after, 
+	.container-fluid#historico a#historico::after,
+	.container-fluid#meusdados a#meusdados::after, 
+	.container-fluid#clientes a#clientes::after,
+	.container-fluid#remessa a#remessa::after,
+	.container-fluid#cadastro a#cadastro::after,
+	.container-fluid#relatorio a#relatorio::after,
+	.container-fluid#arquivado a#arquivado::after,
+	.container-fluid#administrador a#administrador::after {
+		border-color: transparent white transparent transparent;
+		border-style: solid;
+		border-width: 15px;
+		content: '';
+		float: right;
+		margin-top: 5px;
+	}
+}
+/*----menu responsivo-----*/
+
+.slicknav_menu {
+	display:none;
+}
+
+@media screen and (max-width: 768px) {
+    .js #menu {
+		display:none;
+	}
+	
+	.js .slicknav_menu {
+		display:block;
+	}
+}

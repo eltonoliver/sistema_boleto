@@ -1,0 +1,146 @@
+.lo-gin{
+	text-align: center;
+	margin-top: 10%;
+}
+.boxfor{
+	margin: 20px 0;
+}
+.form-control{
+	margin-bottom: 10px;
+}
+.btnlog{
+	width: 100%;
+	background: #E30613;
+	color: #fff;
+	border: 1px solid #E30613;
+}
+.btnlog:hover{
+	background: #000;
+	color: #fff;
+}
+.top{
+	background: #f7f7f7;
+}
+.main{
+	padding: 20px;
+}
+.boxlogo{
+	padding: 10px;
+	width: 100%;
+	text-align: center;
+}
+.boxlogo img{
+	max-width: 150px;
+}
+.altxt{
+	text-align: center;
+	margin-bottom: 40px;
+}
+.inform, .call, .alert, table, th, h2{
+	text-align: center;
+    margin-bottom: 30px;
+}
+table{margin-top: 40px;}
+.glyphicon-search,
+.glyphicon-print,
+.glyphicon-off{
+	font-size: 20px;
+	margin-top: 5px;
+}
+.glyphicon{
+	color: #c00;
+	margin: 0 5px;
+}
+.glyphicon:hover{
+	color: #c00;
+	text-decoration: none;
+}
+.pgo{
+	color: green;
+	font-weight: bold;
+	top: -5px;
+	position: relative;
+	margin-left: 10px;
+}
+fieldset{
+    margin-bottom: 50px;
+    padding-top: 15px;
+}
+.visivel{
+	display: none;
+}
+.call{
+    margin: 15px 0;
+}
+.paneldefault{
+	margin-top: 5%;
+	text-align: center;
+}
+.paneldefaul{
+    text-indent: 50px;
+    margin-top: 20px;
+}
+.panel-body{
+	margin: 5% 0 3%;
+}
+.btn-notific{
+	padding: 10px 30px;
+	border-radius: 5px;
+	font-size: 15px;
+	background: #c60905;
+	color: #fff;
+}
+.btn-notific:hover{
+	color: #fff;
+	text-decoration: none;
+	background: #ff0400;
+}
+@media screen and (min-width: 480px) {
+	.lo-gin{
+		padding: 30px;
+		background: #f7f7f7;
+		border: 1px solid #ccc;
+		text-align: center;
+		border-radius: 8px;
+	}
+}
+@media (min-width: 768px) {
+	.sidebar {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+		display: block;
+		overflow-x: hidden;
+		overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+		padding: 0;
+		background-color: #1D1D1B;
+	}
+	.main, .top{
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+	.boxlogo{
+		background: #ffffff;
+		text-align: center;
+		border: 1px solid #1D1D1B;
+	}
+	.boxlogo img{
+		max-width: 100%;
+	}
+	.visivel{
+		display: block;
+	}
+}
+@media (min-width: 991px) {
+	h4{
+		text-align: left;
+		line-height: 52px;
+	}
+	.call{
+		text-align: right;
+		margin: 15px 0;
+	}
+}
+
