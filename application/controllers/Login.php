@@ -55,19 +55,35 @@ class Login extends CI_Controller {
 
 				$this->db->where('email',$email);
 				$this->db->update('usuario',$data);
+				$this->load->library('email');
+
+				$config['charset'] = 'utf-8';
+				$config['wordwrap'] = TRUE;
+				$config['mailtype'] = 'html';
+				$this->email->initialize($config);
+				$this->email->from('sistema@clientecivilcorp.com.br', 'Sistema de Solicitação de Serviços');
+				$this->email->to($email);				 
+								
+				$this->email->subject('Nova Senha de Acesso');
+				$this->email->message('Esta é sua nova senha de acesso :'.$senhaUsuario.'<br><br>
+					<a href="http://clientecivilcorp.com.br/novo_sistema/">Voltar Ao Sistema</a>');	
+				if($this->email->send()){
+
+					$this->session->set_flashdata('msg', 'Sua nova senha foi enviada para seu e-mail');
+					redirect('Login/');
+				}
 			
 			}else{
-
-				//no tem email cadastrado consultar o administrador
+				$this->session->set_flashdata('msg', 'Você não possui e-mail cadastrado, contate o administrador do sistema!');
+				redirect('Login/');
 			}
+		}else{
+
+			$this->session->set_flashdata('msg', 'Digite um e-mail');
+			redirect('Login/');
 		}
 
-		$this->load->library('email');
-		$this->email->from('sistema@clientecivilcorp.com.br', 'Sistema CivilCorp');
-		$this->email->to('someone@example.com');
-		$this->email->subject('Nova Senha de Acesso');
-		$this->email->message('Est  sua nova senha de acesso :'.$senhaUsuario);
-		$this->email->send();
+		
 		
 	}
 
@@ -109,7 +125,7 @@ class Login extends CI_Controller {
 						
 
 				} else {	
-					$this->session->set_flashdata('erro', 'Erro nos dados de entrada!');
+					$this->session->set_flashdata('msg', 'Erro nos dados de entrada!');
 					cb_boletoHistoricoInsert($login, "Admin: Identifição de admin falhou", '0');
 				
 					redirect('Login/');
@@ -174,7 +190,7 @@ class Login extends CI_Controller {
 					$debugMsg2 = "CNPJ: $cpfCnpj\n\nCNPJ ou senha inválida";
 					
 					//cb_mail('erroboletos@civilcorp.com.br', 'Civilcorp: erro de acesso ao sistema de boletos', $debugMsg2);
-					$this->session->set_flashdata('erro', 'Erro nos dados de entrada!');
+					$this->session->set_flashdata('msg', 'Erro nos dados de entrada!');
 					redirect('Login/');
 				}
 			}
