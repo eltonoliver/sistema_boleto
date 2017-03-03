@@ -181,9 +181,29 @@ class PainelCli extends CI_Controller {
 
 	public function historico(){
 
-		
+		error_reporting(0);
+		$tam = strlen($_SESSION['cliente']); 
+
+		if($tam == 11) {
+			$_SESSION['cliente'] = "000".$_SESSION['cliente'];
+		}
+		$qtdRegistros = $this->db->query("SELECT COUNT(boletoId) AS qtd FROM boleto WHERE cpf_cnpj = {$_SESSION['cliente']}");
+
+		if($qtdRegistros->num_rows() == 0){
+
+			$msg = "Neste momento não existem boletos cadastrados.";
+		}else {
+			$xDias = cc_calcularDataHojeMenosXisDias(10);
+			// seleciona apenas boletos (a) do cliente logado, (b) pendentes e (c) com o máximo de 21 dias de atraso		
+			$sql = $this->db->query("SELECT boletoId,bancoId,dataVencimento,dataPagamento,valorTitulo,cpf_cnpj,nomeSacado,nossoNumero,numeroDocumento,msg2 FROM boleto_historico WHERE cpf_cnpj = {$_SESSION['cliente']} AND dataPagamento <> '0000-00-00'");
+
+			if($sql->num_rows() > 0 ){
+
+				$dados['listaData'] = $sql->result();
+			}
+		}		
 		$this->load->view('cliente/include-header');		
-		$this->load->view('cliente/historico');
+		$this->load->view('cliente/historico',$dados);
 		$this->load->view('cliente/include-footer');
 	}
 
@@ -205,6 +225,232 @@ class PainelCli extends CI_Controller {
 
 
 					$res = $this->db->query("SELECT * FROM boleto WHERE boletoId = '$id' AND nossoNumero = '$nossoNumeroId'");
+					$row = $res->row();
+					
+				
+						
+						$valorTituloDB 		= $row->valorTitulo;
+						$nossoNumeroDB 		= $row->nossoNumero;
+						$dataVencimentoDB	= $row->dataVencimento;
+						$dataDocumentoDB	= $row->dataDocumento;
+						$numeroDocumentoDB	= $row->numeroDocumento;
+						$nomeSacadoDB		= $row->nomeSacado;	
+						$enderecoCompletoDB	= $row->enderecoCompleto;
+						$cidadeDB			= $row->cidade;
+						$estadoDB			= $row->estado;
+						$cepDB				= $row->cep;
+						$mensagem1DB		= $row->mensagem1;
+						$mensagem2DB		= $row->mensagem2;	
+						$aceiteDB			= $row->aceite;
+						$especieTituloDB	= $row->especieTitulo;
+						$agenciaDB			= $row->agencia;
+						$contaCorrenteDB	= $row->contaCorrente;
+						$codigoCedenteDB	= $row->codigoCedente;
+						$valorPagoDB		= $row->valorPago;
+						
+
+					// valores no banco sao inteiros: tornar decimal
+					$valorTituloDB = $valorTituloDB / 100;
+
+					// DADOS DO BOLETO PARA O SEU CLIENTE
+					$dias_de_prazo_para_pagamento = 5;
+					//$taxa_boleto = 2.95;
+					$data_venc = date("d/m/Y", time() + ($dias_de_prazo_para_pagamento * 86400));  // Prazo de X dias OU informe data: "13/04/2006";
+
+					//$valor_boleto = number_format($valor_cobrado+$taxa_boleto, 2, ',', '');
+
+					// Composição Nosso Numero - CEF SIGCB
+					$dadosboleto["nosso_numero1"] = substr($nossoNumeroDB,0 ,3); // tamanho 3
+					$dadosboleto["nosso_numero_const1"] = "1"; //constanto 1 , 1=registrada , 2=sem registro
+					$dadosboleto["nosso_numero2"] = substr($nossoNumeroDB,3 ,3); // tamanho 3
+					$dadosboleto["nosso_numero_const2"] = "1"; //constanto 2 , 4=emitido pelo proprio cliente
+					$dadosboleto["nosso_numero3"] = substr($nossoNumeroDB,6 ,9); // tamanho 9
+
+					// Montagem data Padrao d/m/y
+					$diaVencimento = substr($dataVencimentoDB,8,2);
+					$mesVencimento = substr($dataVencimentoDB,5,2);
+					$anoVencimento = substr($dataVencimentoDB,0,4);
+					$dataVencimento = $diaVencimento."/".$mesVencimento."/".$anoVencimento;
+
+					$diaDataDocumento = substr($dataDocumentoDB,8,2);
+					$mesDataDocumento = substr($dataDocumentoDB,5,2);
+					$anoDataDocumento = substr($dataDocumentoDB,0,4);
+					$dataDocumento = $diaDataDocumento."/".$mesDataDocumento."/".$anoDataDocumento;
+					//fim Montagem Data Vencimento
+
+
+
+
+					$dadosboleto["numero_documento"] = $numeroDocumentoDB;	// Num do pedido ou do documento
+					$dadosboleto["data_vencimento"] = $dataVencimento; // Data de Vencimento do Boleto - REGRA: Formato DD/MM/AAAA
+					$dadosboleto["data_documento"] = $dataDocumento; // Data de emissão do Boleto
+					$dadosboleto["data_processamento"] = date("d/m/Y"); // Data de processamento do boleto (opcional)
+					$dadosboleto["valor_boleto"] = $valorTituloDB; 	// Valor do Boleto - REGRA: Com vírgula e sempre com duas casas depois da virgula
+
+					// DADOS DO SEU CLIENTE
+					$dadosboleto["sacado"] = $nomeSacadoDB;
+					$dadosboleto["endereco1"] = $enderecoCompletoDB;
+					$dadosboleto["endereco2"] = "{$cidadeDB} - {$estadoDB} -  CEP: {$cepDB}";
+
+					// INFORMACOES PARA O CLIENTE
+					// $dadosboleto["demonstrativo1"] = "Pagamento de Compra na Loja Nonononono";
+					// $dadosboleto["demonstrativo2"] = "Mensalidade referente a nonon nonooon nononon<br>Taxa bancária - R$ ".number_format($taxa_boleto, 2, ',', '');
+					// $dadosboleto["demonstrativo3"] = "CIVILCORP - http://www.civilcorp.com.br";
+
+					// INSTRUÇÕES PARA O CAIXA
+					$dadosboleto["instrucoes1"] = "- Sr. Caixa, COBRAR {$mensagem1DB}";
+					$dadosboleto["instrucoes2"] = "- {$mensagem2DB}";
+					// $dadosboleto["instrucoes3"] = "- Em caso de dúvidas entre em contato conosco: xxxx@civilcorp.com.br";
+					// $dadosboleto["instrucoes4"] = "&nbsp; Emitido pelo sistema Projeto BoletoPhp - www.boletophp.com.br";
+
+					// DADOS OPCIONAIS DE ACORDO COM O BANCO OU CLIENTE
+					$dadosboleto["quantidade"] = "1";
+					$dadosboleto["valor_unitario"] = $valorTituloDB;
+					$dadosboleto["aceite"] = $aceiteDB;		
+					$dadosboleto["especie"] = "R$";
+					$dadosboleto["especie_doc"] = $especieTituloDB;
+
+
+					// ---------------------- DADOS FIXOS DE CONFIGURAÇÃO DO SEU BOLETO --------------- //
+
+
+					// DADOS DA SUA CONTA - CEF
+					$dadosboleto["agencia"] = substr($agenciaDB,1,4); // Num da agencia, sem digito
+					$dadosboleto["conta"] = substr($contaCorrenteDB,1,6);	// Num da conta, sem digito
+					$dadosboleto["conta_dv"] = "0";	// Digito do Num da conta
+
+					// DADOS PERSONALIZADOS - CEF
+					$dadosboleto["conta_cedente"] = $codigoCedenteDB; // Código Cedente do Cliente, com 6 digitos (Somente Números)
+					$dadosboleto["carteira"] = "RG";  // Código da Carteira: pode ser SR (Sem Registro) ou CR (Com Registro) - (Confirmar com gerente qual usar)
+
+					// SEUS DADOS
+					$dadosboleto["identificacao"] = "CIVILCORP INCORPORACOES LTDA";
+					$dadosboleto["cpf_cnpj"] = "013.040.140/0001-35";
+					$dadosboleto["endereco"] = "AV. ANDRE ARAUJO, ALEIXO";
+					$dadosboleto["cidade_uf"] = "MANAUS - AM";
+					$dadosboleto["cedente"] = "CIVILCORP  INCORPORACOES LTDA - SISTEMA DE BOLETOS";
+					if ($valorPagoDB == "") {
+							// se boleto estiver vencido, calcular juros e multa
+							$dataLocal = gmdate("Y-m-d");
+							if ($dataVencimentoDB < $dataLocal) {//if ($row['dataVencimento'].' 20:45:00' < gmdate("Y-m-d H:i:s"))
+								/*
+								$hoje = mktime(0,0,0,date("m"),date("d"),date("Y"));
+								$vencimento = mktime(0,0,0,substr($row['dataVencimento'],5,2),substr($row['dataVencimento'],8,2),substr($row['dataVencimento'],0,4));
+								$dias = ($hoje-$vencimento)/86400;
+								
+								//Retorna o dia da semana de uma determinada data.
+								$diaSemana = diasemana($row['dataVencimento']);
+								if ($diaSemana == 0) {
+									$dias = $dias-1;
+								} else if ($diaSemana == 6) {
+									$dias = $dias-2;
+								}
+											
+								$valorBoleto = $dadosboleto["valor_boleto"];
+								$multa = 1.02 * $valor_boleto;
+								$jurosDias = (pow(1+0.00033,$dias) * $valor_boleto) - $valor_boleto;
+								$total = $multa + $jurosDias;
+								$dadosboleto["valor_boleto"] = intval($total);
+								$dadosboleto["valor_boleto"] = str_replace(".", "", $dadosboleto["valor_boleto"]);
+								$total = $dadosboleto["valor_boleto"];
+								
+								//multa e juros
+								$totalMulta = ($total/100) - (intval($valor_boleto)/100);			
+								*/
+								if ($ajustes = cb_valorMulta($valorTituloDB, $dataVencimentoDB)) {
+									//number_format($totalMulta, 2, ",", ".");
+									$dadosboleto["valor_boleto"] = $ajustes['valorFinal'];
+									$totalMulta = number_format($ajustes['acrescimo'], 2, ",", ".");
+									$dadosboleto["data_vencimento"] = ohs_formataData($ajustes['vencimento'], '', br);
+								} else {
+									$dadosboleto["valor_boleto"] = $valorTituloDB;
+									$totalMulta = '';
+								}
+							} else {
+								$dadosboleto["valor_boleto"] = $valorTituloDB;
+								$totalMulta = '';
+							}
+						} else {
+							$dadosboleto["valor_boleto"] = $valorTituloDB;
+							$totalMulta = '';
+						}
+
+					// NÃO ALTERAR!
+					//echo "<center>";
+					//	include("../inc/boletophp/funcoes_cef_sigcb.php"); 
+					//	include("../inc/boletophp/layout_cef.php");
+					//echo "</center>";
+
+					// Traz o dia da semana para qualquer data informada
+						$codigobanco = "104";
+						$codigo_banco_com_dv = $this->geraCodigoBanco($codigobanco);
+						$nummoeda = "9";
+						$fator_vencimento = $this->fator_vencimento($dadosboleto["data_vencimento"]);
+
+						//valor tem 10 digitos, sem virgula
+						$valor = $this->formata_numero($dadosboleto["valor_boleto"]*100, 10, 0, "valor");
+						//agencia é 4 digitos
+						$agencia = $this->formata_numero($dadosboleto["agencia"],4,0);
+						//conta é 5 digitos
+						$conta = $this->formata_numero($dadosboleto["conta"],5,0);
+						//dv da conta
+						$conta_dv = $this->formata_numero($dadosboleto["conta_dv"],1,0);
+						//carteira é 2 caracteres
+						$carteira = $dadosboleto["carteira"];
+
+						//conta cedente (sem dv) com 6 digitos
+						$conta_cedente = $this->formata_numero($dadosboleto["conta_cedente"],6,0);
+						//dv da conta cedente
+						$conta_cedente_dv = $this->digitoVerificador_cedente($conta_cedente);
+
+						//campo livre (sem dv) é 24 digitos
+						$campo_livre = $conta_cedente . $conta_cedente_dv . $this->formata_numero($dadosboleto["nosso_numero1"],3,0) . $this->formata_numero($dadosboleto["nosso_numero_const1"],1,0) . $this->formata_numero($dadosboleto["nosso_numero2"],3,0) . $this->formata_numero($dadosboleto["nosso_numero_const2"],1,0) . $this->formata_numero($dadosboleto["nosso_numero3"],9,0);
+						//dv do campo livre
+						$dv_campo_livre = $this->digitoVerificador_nossonumero($campo_livre);
+						$campo_livre_com_dv ="$campo_livre$dv_campo_livre";
+
+						//nosso número (sem dv) é 17 digitos
+						$nnum = $this->formata_numero($dadosboleto["nosso_numero_const1"],1,0).$this->formata_numero($dadosboleto["nosso_numero_const2"],1,0).$this->formata_numero($dadosboleto["nosso_numero1"],3,0).$this->formata_numero($dadosboleto["nosso_numero2"],3,0).$this->formata_numero($dadosboleto["nosso_numero3"],9,0);
+						//nosso número completo (com dv) com 18 digitos
+						$nossonumero = $nnum . $this->digitoVerificador_nossonumero($nnum);
+
+						// 43 numeros para o calculo do digito verificador do codigo de barras
+						$dv = $this->digitoVerificador_barra("$codigobanco$nummoeda$fator_vencimento$valor$campo_livre_com_dv", 9, 0);
+						// Numero para o codigo de barras com 44 digitos
+						$linha = "$codigobanco$nummoeda$dv$fator_vencimento$valor$campo_livre_com_dv";
+
+						$agencia_codigo = $agencia." / ". $conta_cedente ."-". $conta_cedente_dv;
+
+						$dadosboleto["codigo_barras"] = $linha;
+						$dadosboleto["linha_digitavel"] = $this->monta_linha_digitavel($linha);
+						$dadosboleto["agencia_codigo"] = $agencia_codigo;
+						$dadosboleto["nosso_numero"] = $nossonumero;
+						$dadosboleto["codigo_banco_com_dv"] = $codigo_banco_com_dv;
+
+						/**********************************************************************/
+
+						include $_SERVER['DOCUMENT_ROOT'].'/novo_sistema/assets/inc/boletophp/layout_cef.php';
+					}else{
+
+						echo 'Erro no sistema consulte o administrador Nº BRD';
+					}
+				
+
+	}
+
+
+	public function processaBoletoHistorico($boleto,$boletoID,$nossoNumero){
+
+		error_reporting(0);
+		if($boleto == "caixa"){
+					$id = $boletoID; 
+					$nossoNumeroId = $nossoNumero;
+					$this->db->where('boletoID',$id);
+					$this->db->where('nossoNumero',$nossoNumeroId);
+					$row = $this->db->get('boleto')->result();
+
+
+					$res = $this->db->query("SELECT * FROM boleto_historico WHERE boletoId = '$id' AND nossoNumero = '$nossoNumeroId'");
 					$row = $res->row();
 					
 				

@@ -24,51 +24,28 @@
 							<th>Valor</th>
 							<th>Situação</th>
 						</thead>
-						<tr>
-							<td>ENT 003/005</td>
-							<td></td>
-							<td>Helder Pinto da Silva</td>
-							<td>000000087156392</td>
-							<td>28/02/2017</td>
-							<td>2.600,00</td>
-							<td><!--<a href=""  class="btn btn-default">Pagar</a>--><a target="_blank" class="glyphicon glyphicon-search" href=""></a><span class="pgo">Pago</span></td>
-						</tr>
-						<tr>
-							<td>ENT 003/005</td>
-							<td></td>
-							<td>Helder Pinto da Silva</td>
-							<td>000000087156392</td>
-							<td>28/02/2017</td>
-							<td>2.600,00</td>
-							<td> <!-- <a href="" class="btn btn-warning">Renegociar</a> --><a target="_blank" class="glyphicon glyphicon-search" href=""></a><span class="pgo">Pago</span></td>
-						</tr>
-						<tr>
-							<td>ENT 003/005</td>
-							<td></td>
-							<td>Helder Pinto da Silva</td>
-							<td>000000087156392</td>
-							<td>28/02/2017</td>
-							<td>2.600,00</td>
-							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a> <span class="pgo">Pago</span></td>
-						</tr>
-						<tr>
-							<td>ENT 003/005</td>
-							<td></td>
-							<td>Helder Pinto da Silva</td>
-							<td>000000087156392</td>
-							<td>28/02/2017</td>
-							<td>2.600,00</td>
-							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a> <span class="pgo">Pago</span></td>
-						</tr>
-						<tr>
-							<td>ENT 003/005</td>
-							<td></td>
-							<td>Helder Pinto da Silva</td>
-							<td>000000087156392</td>
-							<td>28/02/2017</td>
-							<td>2.600,00</td>
-							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a> <span class="pgo">Pago</span></td>
-						</tr>
+					
+							<?php foreach ($listaData as $value):?>
+							<tr>
+								<td><?php echo $value->numeroDocumento; ?></td>
+								<td><?php echo $value->msg2; ?></td>
+								<td><?php echo $value->nomeSacado; ?></td>
+								<td><?php echo $value->nossoNumero; ?></td>
+								<td><?php echo substr($value->dataVencimento,8,2)."/".substr($value->dataVencimento,5,2)."/".substr($value->dataVencimento,0,4) ?></td>
+								<td><?php echo number_format((intval($value->valorTitulo)/100), 2, ",", "."); ?></td>
+								
+								<td>
+								<?php if($value->bancoId == 104){ ?>		
+									<a target="_blank" class="glyphicon glyphicon-search"
+									href="<?php echo base_url(); ?>cliente/PainelCli/processaBoletoHistorico/caixa/<?php echo $value->boletoId; ?>/<?php echo $value->nossoNumero?>"></a><span class="pgo">Pago</span>
+								<?php }elseif($value->bancoId == 237){ ?>
+									<a target="_blank" class="glyphicon glyphicon-search" href="<?php echo base_url(); ?>cliente/PainelCli/processaBoletoHistorico/bradesco/<?php echo $value->boletoId; ?>/<?php echo $value->nossoNumero?>"></a><span class="pgo">Pago</span>
+								<?php } ?>	
+								</td>
+							
+							</tr>
+						<?php endforeach; ?>
+					
 					</table>
 				</div>
 			</div>
