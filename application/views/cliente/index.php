@@ -30,6 +30,7 @@
 							<th>Imprimir</th>
 						</thead>
 					<?php foreach ($listaData as $value):?>
+						<?php $dataV =  substr($value->dataVencimento,8,2)."/".substr($value->dataVencimento,5,2)."/".substr($value->dataVencimento,0,4); ?>
 						<tr>
 							<td><?php echo $value->numeroDocumento; ?></td>
 							<td><?php echo $value->msg2; ?></td>
@@ -42,11 +43,18 @@
 							<?php if($value->bancoId == 104){ ?>		
 								<a target="_blank" class="glyphicon glyphicon-print"
 								href="<?php echo base_url(); ?>cliente/PainelCli/processaBoleto/caixa/<?php echo $value->boletoId; ?>/<?php echo $value->nossoNumero?>"></a>
+								<?php if($dataV == date('d/m/Y')){ ?> 
+									<a href="" class="btn btn-warning">Renegociar</a>
+								   <?php } ?>
 							<?php }elseif($value->bancoId == 237){ ?>
 								<a target="_blank" class="glyphicon glyphicon-print" href="<?php echo base_url(); ?>cliente/PainelCli/processaBoleto/bradesco/<?php echo $value->boletoId; ?>/<?php echo $value->nossoNumero?>"></a>
+								<?php if($dataV == date('d/m/Y')){ ?> 
+									<a href="" class="btn btn-warning">Renegociar</a>
+								   <?php } ?>
 							<?php } ?>	
 							</td>
 
+							<!-- <td><a href="" class="btn btn-warning">Renegociar</a></td>-->
 						</tr>
 					<?php endforeach; ?>	
 					</table>
