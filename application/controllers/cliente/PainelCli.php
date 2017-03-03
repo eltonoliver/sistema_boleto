@@ -4,12 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class PainelCli extends CI_Controller {
 
 	public function __construct(){
-
+		error_reporting(0);
 		parent::__construct();
 		$this->load->helper("funcoes");
 		if(!$this->session->userdata('cliente')){
 
 			redirect('Login/');
+		}
+				 $this->db->where('cpf_cnpj',$_SESSION['cliente']); 	
+		$query = $this->db->get('usuario')->result();
+
+		if($query[0]->email == ''){
+
+			$this->meusdados();
 		}
 	}
 
@@ -181,7 +188,7 @@ class PainelCli extends CI_Controller {
 
 	public function historico(){
 
-		error_reporting(0);
+	
 		$tam = strlen($_SESSION['cliente']); 
 
 		if($tam == 11) {
@@ -215,7 +222,7 @@ class PainelCli extends CI_Controller {
 
 	public function processaBoleto($boleto,$boletoID,$nossoNumero){
 
-		error_reporting(0);
+	
 		if($boleto == "caixa"){
 					$id = $boletoID; 
 					$nossoNumeroId = $nossoNumero;
@@ -441,7 +448,6 @@ class PainelCli extends CI_Controller {
 
 	public function processaBoletoHistorico($boleto,$boletoID,$nossoNumero){
 
-		error_reporting(0);
 		if($boleto == "caixa"){
 					$id = $boletoID; 
 					$nossoNumeroId = $nossoNumero;
