@@ -375,6 +375,8 @@ function cb_boletoInsertBradesco()
 				if ($tem1 == $tem2) {
 					cb_clienteSalvar();
 					$sql = $CI->db->query("INSERT INTO boleto (bancoID,nomeSacado, dataProcessamento, dataDocumento, dataVencimento, dataPagamento , carteira, numeroDocumento, nossoNumero, valorTitulo, agencia, contaCorrente,descricaoBoleto, cpf_cnpj, enderecoCompleto, cep, mensagem1, mensagem2, mensagem3, mensagem4, numeroControle, nossoNumeroDigito, msg1, msg2, identificacao, especieTitulo, aceite, valorPago) VALUES ('$bancoID','$nomeSacado', '$dataEmissao', '$dataEmissao', '$dataVencimento', '', '$carteira', '$numeroDocumento', '$nossoNumero', '$valorTitulo', '$agencia', '$contaCorrente', 'Em aberto', '$cpf_cnpj', '$enderecoCompleto', '$cep', '$mensagem1', '$mensagem2', '$mensagem3', '$mensagem4', '$numeroControle', '$nossoNumeroDigito', '$msg1', '$msg2', '$msg2', '$especieTitulo', '$aceite', '')");
+
+					$sql = $CI->db->query("INSERT INTO boleto_historico (bancoID,nomeSacado, dataProcessamento, dataDocumento, dataVencimento, dataPagamento , carteira, numeroDocumento, nossoNumero, valorTitulo, agencia, contaCorrente,descricaoBoleto, cpf_cnpj, enderecoCompleto, cep, mensagem1, mensagem2, mensagem3, mensagem4, numeroControle, nossoNumeroDigito, msg1, msg2, identificacao, especieTitulo, aceite, valorPago) VALUES ('$bancoID','$nomeSacado', '$dataEmissao', '$dataEmissao', '$dataVencimento', '', '$carteira', '$numeroDocumento', '$nossoNumero', '$valorTitulo', '$agencia', '$contaCorrente', 'Em aberto', '$cpf_cnpj', '$enderecoCompleto', '$cep', '$mensagem1', '$mensagem2', '$mensagem3', '$mensagem4', '$numeroControle', '$nossoNumeroDigito', '$msg1', '$msg2', '$msg2', '$especieTitulo', '$aceite', '')");
 					// echo $sql."<br>";
 					if (!$sql->db->error()) {
 						/*
@@ -412,9 +414,23 @@ function cb_boletoInsertBradesco()
 					$sql = $CI->db->query("
 						UPDATE boleto SET nossoNumero = '$nossoNumero', carteira = '$carteira', dataPagamento = '$dataPagamento', nossoNumeroDigito = '$nossoNumeroDigito', valorPago='$valor'
 						WHERE numeroDocumento LIKE '$numeroDocumento' AND numeroControle LIKE '$numeroControle'
-					");					
+					");		
+
+					$sql = $CI->db->query("
+						UPDATE boleto_historico SET nossoNumero = '$nossoNumero', carteira = '$carteira', dataPagamento = '$dataPagamento', nossoNumeroDigito = '$nossoNumeroDigito', valorPago='$valor'
+						WHERE numeroDocumento LIKE '$numeroDocumento' AND numeroControle LIKE '$numeroControle'
+					");				
 					
-												
+					if(!empty($valor) && !empty($dataPagamento)){
+
+						$CI->db->where('valorPago',$valor);
+						$query = $CI->db->get('boleto')->result();
+
+						$sql = $CI->db->query("");
+
+
+					}	
+
 				}//fim do if
 			}//fim do if da key
 		}//fim do foreach'
@@ -568,6 +584,8 @@ function cb_boletoInsertCaixaEconomica()
 
 					 	echo "Error";
 					 }
+
+					 $CI->db->query("INSERT INTO boleto_historico (bancoID,nomeSacado, dataProcessamento, dataDocumento, dataVencimento, dataPagamento , carteira, numeroDocumento, nossoNumero, valorTitulo, agencia, contaCorrente,descricaoBoleto, cpf_cnpj, enderecoCompleto, cep, mensagem1, mensagem2, mensagem3, mensagem4, numeroControle, nossoNumeroDigito, msg1, msg2, identificacao, especieTitulo, aceite, valorPago, cidade, estado, codigoCedente) VALUES ('$bancoID','$nomeSacado', '$dataEmissao', '$dataEmissao', '$dataVencimento', '0000-00-00', '$carteira', '$numeroDocumento', '$nossoNumero','$valorTitulo', '$agencia', '$contaCorrente', 'Em aberto', '$cpf_cnpj', '$enderecoCompleto', '$cep', '$mensagem1', '$mensagem2', '$mensagem3', '$mensagem4', '$numeroControle', '$nossoNumeroDigito', '$msg1', '$msg2', '$msg2', '$especieTitulo', '$aceite', '', '$cidade','$estado','$codigoCedente')");
 					// echo $sql."<br>";
 										
 						//@todo('Erro na consulta!'); // Erro Mysql: registro duplicado porque foi inserido índice Unique no campo numeroControle: melhorar script
@@ -629,7 +647,12 @@ function cb_boletoInsertCaixaEconomica()
 						")){
 
 						echo "Error";
-					}		
+					}	
+
+					$CI->db->query("
+							UPDATE boleto_historico SET nossoNumero = '$nossoNumero', dataProcessamento = '$dataProcessamento', carteira = '$carteira', dataPagamento = '$dataPagamento', nossoNumeroDigito = '$nossoNumeroDigito', valorPago='$valor'
+							WHERE numeroDocumento LIKE '$numeroDocumento' AND numeroControle LIKE '$numeroControle'
+						");	
 					// echo $sql."<br>";
 										
 						//@todo('Erro na consulta!'); // Erro Mysql: registro duplicado porque foi inserido índice Unique no campo numeroControle: melhorar script

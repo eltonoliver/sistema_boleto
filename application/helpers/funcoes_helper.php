@@ -634,7 +634,7 @@ function cb_boletoDeleteAntigos()
 	// permite visualizar no máximo com 10 dias de atraso
 	$CI =& get_instance();
 	$xDias = cc_calcularDataHojeMenosXisDias(9);
-
+	
 	$CI->db->query("DELETE FROM boleto WHERE dataVencimento < '$xDias'");
 }
 

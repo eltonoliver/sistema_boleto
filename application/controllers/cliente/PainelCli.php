@@ -195,7 +195,7 @@ class PainelCli extends CI_Controller {
 
 	public function processaBoleto($boleto,$boletoID,$nossoNumero){
 
-
+		error_reporting(0);
 		if($boleto == "caixa"){
 					$id = $boletoID; 
 					$nossoNumeroId = $nossoNumero;
