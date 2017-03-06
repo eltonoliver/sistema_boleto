@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h2>Boletos em aberto</h2>
-					<table class="table table-striped">
+					<table class="table table-striped" id="example">
 						<thead>
 							<th>DOCUMENTO</th>
 							<th>NOME SACADO / CPF</th>
@@ -71,14 +71,143 @@
 							<td>7.580,38</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">MARIA DE FATIMA DE SOUZA TELES<br>368.670.633-49</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>7.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
+						<tr>
+							<td>PAR 051/072</td>
+							<td class="text-uppercase">Elton<br>896.055.782-04</td>
+							<td>BOLETO INDISPONIVEL / REJEITADO</td>
+							<td>28/02/2017</td>
+							<td>6.580,38</td>
+							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+						</tr>
 					</table>
-					
+					<!--
 					<div class="btn-group" role="group" aria-label="First group">
 						<button type="button" class="btn btn-default">1</button>
 						<button type="button" class="btn btn-default">2</button>
 						<button type="button" class="btn btn-default">3</button>
 						<button type="button" class="btn btn-default">4</button>
 					</div>
+					-->
 				</div>
 			</div>
 		</div>

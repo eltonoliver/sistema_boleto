@@ -3,6 +3,7 @@
 						<div class="col-md-4 txtalg text-uppercase visivel">
 							<h4>Nome do administrador</h4>
 						</div>
+						<!--
 						<div class="col-md-4 call">
 							<select  class="form-control">
 								<option value="Nome">Nome</option>
@@ -17,6 +18,6 @@
 									<button class="btn btn-default" type="button">Pesquisar</button>
 								</span>
 							</div>
-						</div>
+						</div>-->
 					</div>
 				</div>
