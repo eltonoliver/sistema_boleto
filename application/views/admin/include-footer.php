@@ -13,11 +13,11 @@
 			$(":file").filestyle({buttonBefore: true});
 		</script>
 
-		 <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
   <script>
   $(function(){
-    $("#example").dataTable({
+    $("#form-admin").dataTable({
 
     	 "oLanguage": {
     	 	 "sEmptyTable": "Nenhum registro encontrado",
@@ -51,7 +51,7 @@
   </script>
   <script type="text/javascript">
 	// For demo to fit into DataTables site builder...
-	$('#example')
+	$('#form-admin')
 		.removeClass( 'display' )
 		.addClass('table table-striped table-bordered');
 </script>
