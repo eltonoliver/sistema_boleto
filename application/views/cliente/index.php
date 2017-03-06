@@ -19,7 +19,7 @@
 					<?php }else{ ?>
 					<div class="alert alert-success" role="alert">Neste momento não existem boletos cadastrados.</div>
 					<?php } ?>
-					<table class="table table-striped">
+					<table class="table table-striped" id="form-cli">
 						<thead>
 							<th>Nº Doc</th>
 							<th>Descrição</th>

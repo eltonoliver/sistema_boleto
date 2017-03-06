@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h2 class="txtalg">Histórico</h2>
-					<table class="table table-striped">
+					<table class="table table-striped" id="form-cli">
 						<thead>
 							<th>Nº Doc</th>
 							<th>Descrição</th>
