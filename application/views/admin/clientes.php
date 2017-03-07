@@ -14,9 +14,9 @@
 			<div class="row">
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h2>Clientes</h2>
-					<a href="cadastro.php"  class="btn btn-success" style="padding-bottom: 10px;">Cadastrar</a>
+					<a href="cadastro.php"  class="btn btn-success" style="margin-bottom: 10px;">Cadastrar</a>
 
-					<table class="table table-striped" id="form-admin">
+					<table class="table table-striped" id="form-admin" >
 						<thead>
 							<th>NOME CLIENTE / CPF/CNPJ</th>
 							<th>E-MAIL</th>
@@ -68,13 +68,14 @@
 							</td>
 						</tr>
 					</table>
-					
+					<!--
 					<div class="btn-group" role="group" aria-label="First group">
 						<button type="button" class="btn btn-default">1</button>
 						<button type="button" class="btn btn-default">2</button>
 						<button type="button" class="btn btn-default">3</button>
 						<button type="button" class="btn btn-default">4</button>
 					</div>
+					-->
 				</div>
 			</div>
 		</div>
