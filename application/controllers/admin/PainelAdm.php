@@ -14,9 +14,17 @@ class PainelAdm extends CI_Controller {
 	}
 
 	public function index(){
+		cb_boletoDeleteAntigos();
+		$dados['dataXdias'] = cc_calcularDataHojeMenosXisDias(10);
+		$query = $this->db->query('SELECT boletoId,dataVencimento,dataPagamento,valorTitulo,cpf_cnpj,nomeSacado,nossoNumero,numeroDocumento,bancoID FROM boleto $condicao ORDER BY boletoId');
+		$dados['listaBoletos'] = $query->result();
+		//echo "<pre>";
+		//echo $dataXdias;
+		//print_r($query->result());
+		//exit;
 
 		$this->load->view('admin/include-header');
-		$this->load->view('admin/index');
+		$this->load->view('admin/index',$dados);
 		$this->load->view('admin/include-footer');
 	}
 
