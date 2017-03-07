@@ -692,7 +692,7 @@ function cb_clienteSalvar()
 		$sql = $CI->db->get('usuario')->result();
 		if(!$sql){
 
-		$CI->db->query("INSERT INTO usuario (nome,email,cpf_cnpj,senha,cep) VALUES ('$nomeUsuario','$emailUsuario','$cpf_cnpjUsuario','$senhaUsuario','$cepUsuario')");
+		$CI->db->query("INSERT INTO usuario (nome,email,cpf_cnpj,senha,cep,status_usuario) VALUES ('$nomeUsuario','$emailUsuario','$cpf_cnpjUsuario','$senhaUsuario','$cepUsuario','1')");
 		}
 }
 /**
