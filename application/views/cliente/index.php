@@ -40,6 +40,7 @@
 							<td><?php echo number_format((intval($value->valorTitulo)/100), 2, ",", "."); ?></td>
 							
 							<td>
+
 							<?php if($value->bancoId == 104){ ?>		
 								<a target="_blank" class="glyphicon glyphicon-print"
 								href="<?php echo base_url(); ?>cliente/PainelCli/processaBoleto/caixa/<?php echo $value->boletoId; ?>/<?php echo $value->nossoNumero?>"></a>

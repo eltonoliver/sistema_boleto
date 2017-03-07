@@ -1,4 +1,4 @@
-<?php include "include-header.php" ?>
+
 
 		<div class="container-fluid" id="clientes">
 			<div class="row">
@@ -14,8 +14,9 @@
 			<div class="row">
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h2>Clientes</h2>
-					<a href="cadastro.php"  class="btn btn-success">Cadastrar</a>
-					<table class="table table-striped">
+					<a href="cadastro.php"  class="btn btn-success" style="padding-bottom: 10px;">Cadastrar</a>
+
+					<table class="table table-striped" id="form-admin">
 						<thead>
 							<th>NOME CLIENTE / CPF/CNPJ</th>
 							<th>E-MAIL</th>
@@ -77,5 +78,3 @@
 				</div>
 			</div>
 		</div>
-
-<?php include "include-footer.php" ?>

@@ -14,9 +14,9 @@
 			<div class="row">
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h2>Boletos</h2>
-					<?php if(count($listaBoletos) <=0): ?>
+					<?php if(count($listaBoletos) <=0){ ?>
 					<div class="alert alert-success" role="alert">Neste momento não existem boletos cadastrados.</div>
-					<?php endif ?>
+					<?php } ?>
 					<table class="table table-striped" id="form-admin">
 						<thead>
 							<th>DOCUMENTO</th>
@@ -68,7 +68,19 @@
 									echo ($value->dataPagamento == '0000-00-00')?"<spam $style>Em aberto</span>":'<span class="pgo">Pago</span>';
 
 							 	?></td><!--<span class="pgo">Pago</span> -->
-							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
+								<td>
+								  <?php if($value->nossoNumero != "00000000000"){ ?>	
+									<?php if($value->bancoID == 104){ ?>		
+										<a target="_blank" class="glyphicon glyphicon-print"
+										href="<?php echo base_url(); ?>admin/PainelAdm/processaBoleto/caixa/<?php echo $value->boletoId; ?>/<?php echo $value->nossoNumero?>"></a>
+									
+										
+									<?php }elseif($value->bancoID == 237){ ?>
+										<a target="_blank" class="glyphicon glyphicon-print" href="<?php echo base_url(); ?>admin/PainelAdm/processaBoleto/bradesco/<?php echo $value->boletoId; ?>/<?php echo $value->nossoNumero?>"></a>
+										
+									<?php } ?>	
+									<?php } ?>
+							</td>
 						</tr>
 						<?php 	} ?>
 					</table>
