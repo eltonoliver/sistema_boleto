@@ -13,7 +13,7 @@
 
 			<div class="row">
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-					<h2>Boletos em aberto</h2>
+					<h2>Boletos</h2>
 					<table class="table table-striped" id="form-admin">
 						<thead>
 							<th>DOCUMENTO</th>
@@ -21,7 +21,8 @@
 							<th>NOSSO NÚMERO</th>
 							<th>VENC</th>
 							<th>VALOR</th>
-							<th>Visualizar</th>
+							<th>STATUS</th>
+							<th>OPÇÕES</th>
 						</thead>
 						<tr>
 							<td>PAR 051/072</td>
@@ -29,6 +30,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -37,6 +39,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td><span class="pgo">Pago</span></td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -45,6 +48,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -53,6 +57,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -61,6 +66,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -69,6 +75,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -77,6 +84,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -85,6 +93,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -93,6 +102,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -101,6 +111,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td><span class="pgo">Pago</span></td>
+							
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -109,6 +121,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+							
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -117,6 +131,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+							<td
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -125,6 +141,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+						
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -133,6 +151,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+						
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -141,6 +161,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+						
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -149,6 +171,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+							
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -157,6 +181,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+						
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -165,6 +191,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+						
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -173,6 +201,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+							
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -181,6 +211,8 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
+
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -189,6 +221,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>7.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 						<tr>
@@ -197,6 +230,7 @@
 							<td>BOLETO INDISPONIVEL / REJEITADO</td>
 							<td>28/02/2017</td>
 							<td>6.580,38</td>
+							<td>Em aberto</td>
 							<td><a target="_blank" class="glyphicon glyphicon-search" href=""></a></td>
 						</tr>
 					</table>
