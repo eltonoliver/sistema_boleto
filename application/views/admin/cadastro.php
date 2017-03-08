@@ -1,4 +1,4 @@
-<?php include "include-header.php" ?>
+
 
 		<div class="container-fluid" id="cadastro">
 			<div class="row">
@@ -37,4 +37,4 @@
 			</div>
 		</div>
 
-<?php include "include-footer.php" ?>
+
