@@ -30,7 +30,7 @@
 							<td class="text-uppercase"><?php echo $value->nome ?><br><?php echo $value->cpf_cnpj; ?></td>
 							<td><?php echo $value->email ?></td>
 							<td>
-								<a target="_blank" class="glyphicon glyphicon-search" href="<?php echo base_url(); ?>admin/PainelAdm/visualizarCliente/<?php echo $value->usuarioId; ?>"></a>
+								<a target="_blank" class="glyphicon glyphicon-search" href="<?php echo base_url(); ?>admin/PainelAdm/boletoPorUsuario/<?php echo $value->cpf_cnpj; ?>"></a>
 								<a class="glyphicon glyphicon-edit" title="Editar" href="<?php echo base_url(); ?>admin/PainelAdm/editarClientes/<?php echo $value->usuarioId; ?>"></a>
 								<a class="glyphicon glyphicon-folder-open" id="Arquivar" title="Arquivar" href="<?php echo base_url(); ?>admin/PainelAdm/arquivarCliente/<?php echo $value->usuarioId; ?>"></a>
 							</td>

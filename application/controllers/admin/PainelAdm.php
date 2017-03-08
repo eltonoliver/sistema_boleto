@@ -14,17 +14,32 @@ class PainelAdm extends CI_Controller {
 	}
 
 	public function index(){
-		cb_boletoDeleteAntigos();
-		$dados['dataXdias'] = cc_calcularDataHojeMenosXisDias(10);
-		$query = $this->db->query('SELECT boletoId,dataVencimento,dataPagamento,valorTitulo,cpf_cnpj,nomeSacado,nossoNumero,numeroDocumento,bancoID FROM boleto $condicao ORDER BY boletoId');
-		$dados['listaBoletos'] = $query->result();
-		
+	
+			cb_boletoDeleteAntigos();
+			$dados['dataXdias'] = cc_calcularDataHojeMenosXisDias(10);
+			$query = $this->db->query('SELECT boletoId,dataVencimento,dataPagamento,valorTitulo,cpf_cnpj,nomeSacado,nossoNumero,numeroDocumento,bancoID FROM boleto ORDER BY boletoId');
+			$dados['listaBoletos'] = $query->result();
+	
 
 		$this->load->view('admin/include-header');
 		$this->load->view('admin/index',$dados);
 		$this->load->view('admin/include-footer');
 	}
 
+	public function boletoPorUsuario($cpf_cnpj){
+			cb_boletoDeleteAntigos();
+			$dados['dataXdias'] = cc_calcularDataHojeMenosXisDias(10);
+		$query = $this->db->query('SELECT boletoId,dataVencimento,dataPagamento,valorTitulo,cpf_cnpj,nomeSacado,nossoNumero,numeroDocumento,bancoID FROM boleto WHERE cpf_cnpj = "'.$cpf_cnpj.'"  ORDER BY boletoId');
+			$dados['listaBoletos'] = $query->result();
+
+		
+
+		$this->load->view('admin/include-header');
+		$this->load->view('admin/index',$dados);
+		$this->load->view('admin/include-footer');
+
+
+	}
 	public function clientes(){
 
 		$this->db->where('status_usuario !=',NULL);
