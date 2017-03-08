@@ -32,7 +32,7 @@
 							<td>
 								<a target="_blank" class="glyphicon glyphicon-search" href="<?php echo base_url(); ?>admin/PainelAdm/boletoPorUsuario/<?php echo $value->cpf_cnpj; ?>"></a>
 								<a class="glyphicon glyphicon-edit" title="Editar" href="<?php echo base_url(); ?>admin/PainelAdm/editarClientes/<?php echo $value->usuarioId; ?>"></a>
-								<a class="glyphicon glyphicon-folder-open" id="Arquivar" title="Arquivar" href="<?php echo base_url(); ?>admin/PainelAdm/arquivarCliente/<?php echo $value->usuarioId; ?>"></a>
+								<a class="glyphicon glyphicon-folder-open arquivar"  title="Arquivar" href="<?php echo base_url(); ?>admin/PainelAdm/arquivarCliente/<?php echo $value->usuarioId; ?>"></a>
 							</td>
 						</tr>
 						<?php } ?>

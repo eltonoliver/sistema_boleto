@@ -46,9 +46,17 @@
     	 
     });
 
-    $("#Arquivar").click(function(){
+    $(".arquivar").click(function(){
 
           if(confirm("Deseja arquivar este cliente?")){
+            return true;
+          }else{
+            return false;
+          }
+    });
+     $(".desarquivar").click(function(){
+
+          if(confirm("Deseja desarquivar este cliente?")){
             return true;
           }else{
             return false;

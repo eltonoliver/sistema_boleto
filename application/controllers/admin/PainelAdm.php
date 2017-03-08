@@ -118,9 +118,28 @@ class PainelAdm extends CI_Controller {
 
 	public function arquivamentoCli(){
 
+		$this->db->where('status_usuario',0);
+		$this->db->where('status_usuario','NULL');
+		$dados['listaUsuarioArq'] = $this->db->get('usuario')->result();
+
 		$this->load->view('admin/include-header');
-		$this->load->view('admin/arquivado');
+		$this->load->view('admin/arquivado',$dados);
 		$this->load->view('admin/include-footer');
+	}
+
+	public function desArquivaMentoCli($id){
+
+		$data = array(
+    
+        'status_usuario' => 1
+		);
+
+		$this->db->where('usuarioId',$id);
+		if($this->db->update('usuario',$data)){
+			$this->session->set_flashdata('mensagemSucesso', 'Cliente desarquivado com Sucesso');
+			redirect('admin/PainelAdm/arquivamentoCli/');
+		}
+
 	}
 
 	public function envioArquivo(){
@@ -229,7 +248,7 @@ class PainelAdm extends CI_Controller {
 					}//fim do else			
 				} // fim do for
 				if($cont != 0){
-					echo "<center> $arquivosEnviados <br> <a href='?p=boleto'> <button> Visualizar Boletos</button></a></center>";			
+					echo "<center> $arquivosEnviados <br> <a href='".base_url()."admin/PainelAdm'> <button> Visualizar Boletos</button></a></center>";			
 				}
 			} //fim do primeiro else 
 		
