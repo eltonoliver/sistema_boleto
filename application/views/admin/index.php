@@ -76,7 +76,7 @@
 									
 										
 									<?php }elseif($value->bancoID == 237){ ?>
-										<a target="_blank" class="glyphicon glyphicon-print" href="<?php echo base_url(); ?>admin/PainelAdm/processaBoleto/bradesco/<?php echo $value->boletoId; ?>/<?php echo $value->nossoNumero?>"></a>
+										<a target="_blank" class="glyphicon glyphicon-print" href="<?php echo base_url(); ?>admin/PainelAdm/editarClientes/<?php echo $value->usuarioId; ?>"></a>
 										
 									<?php } ?>	
 									<?php } ?>

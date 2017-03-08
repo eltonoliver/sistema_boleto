@@ -18,10 +18,7 @@ class PainelAdm extends CI_Controller {
 		$dados['dataXdias'] = cc_calcularDataHojeMenosXisDias(10);
 		$query = $this->db->query('SELECT boletoId,dataVencimento,dataPagamento,valorTitulo,cpf_cnpj,nomeSacado,nossoNumero,numeroDocumento,bancoID FROM boleto $condicao ORDER BY boletoId');
 		$dados['listaBoletos'] = $query->result();
-		//echo "<pre>";
-		//echo $dataXdias;
-		//print_r($query->result());
-		//exit;
+		
 
 		$this->load->view('admin/include-header');
 		$this->load->view('admin/index',$dados);
@@ -30,9 +27,56 @@ class PainelAdm extends CI_Controller {
 
 	public function clientes(){
 
+		$this->db->where('status_usuario !=',NULL);
+		$this->db->where('status_usuario !=',0);	
+		$query = $this->db->get('usuario')->result();
+		$dados['listaUsuarioCli'] = $query;
+
 		$this->load->view('admin/include-header');
-		$this->load->view('admin/clientes');
+		$this->load->view('admin/clientes',$dados);
 		$this->load->view('admin/include-footer');
+	}
+
+	public function editarClientes($id){
+		$this->db->where('usuarioId',$id);
+		$dados['listaDados'] = $this->db->get('usuario')->result();
+		$this->load->view('admin/include-header');
+		$this->load->view('admin/editar-clientes',$dados);
+		$this->load->view('admin/include-footer');
+
+
+	}
+
+	public function visualizarCliente($id){
+
+		$this->db->where('usuarioId',$id);
+		$dados['listaDados'] = $this->db->get('usuario')->result();
+		$this->load->view('admin/include-header');
+		$this->load->view('admin/dados-clientes',$dados);
+		$this->load->view('admin/include-footer');
+	}
+
+	public function editar($id){
+
+		
+		$data = array(
+        'nome' 				=> $this->input->post('nome'),
+        'email' 			=> $this->input->post('email'),
+        'cpf_cnpj'  		=> $this->input->post('cpf_cnpj'),
+        'contato'  			=> $this->input->post('contato'),
+        'endereco'   		=> $this->input->post('endereco'),
+        'cep'  				=> $this->input->post('cep'),
+        'senha'     		=> md5($this->input->post('senha')),
+        'status_password' => 1	
+		);
+
+
+		$this->db->where('usuarioId',$id);
+		if($this->db->update('usuario',$data)){
+			$this->session->set_flashdata('mensagemSucesso', 'Dados Alterados com Sucesso');
+			redirect('admin/PainelAdm/editarClientes/'.$id);
+		}
+
 	}
 
 	public function cadastroClientes(){
@@ -40,6 +84,21 @@ class PainelAdm extends CI_Controller {
 		$this->load->view('admin/include-header');
 		$this->load->view('admin/cadastro');
 		$this->load->view('admin/include-footer');
+	}
+
+	public function arquivarCliente($id){
+
+		$data = array(
+    
+        'status_usuario' => 0
+		);
+
+		$this->db->where('usuarioId',$id);
+		if($this->db->update('usuario',$data)){
+			$this->session->set_flashdata('mensagemSucesso', 'Cliente arquivado com Sucesso');
+			redirect('admin/PainelAdm/clientes/'.$id);
+		}
+
 	}
 
 	public function arquivamentoCli(){

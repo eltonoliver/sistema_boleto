@@ -1,5 +1,5 @@
-<?php include "include-header.php" ?>
 
+        
 		<div class="container-fluid" id="meusdados">
 			<div class="row">
 				<div class="col-sm-3 col-md-2 sidebar">
@@ -18,53 +18,37 @@
                         <fieldset>
                             <legend>Informação do cliente</legend>
                             
-                            <form action="">
+                         
                                 <div class="form-group">
-                                    <label for="nome">Seu nome completo:</label>
-                                    <input required type="text" id="nome" class="form-control text-uppercase" value="Helder Pinto da Silva">
+                                    <label for="nome">Seu nome completo: <?php echo $listaDados[0]->nome; ?></label>
+                                  
                                 </div>
                                 <div class="form-group">
-                                    <label for="cpf">CPF:</label>
-                                    <input required type="text" id="cpf" class="form-control" value="36925814722" required  pattern="^(\d{3}\.\d{3}\.\d{3}-\d{2})|(\d{11})$">
+                                    <label for="cpf">CPF: <?php echo $listaDados[0]->cpf_cnpj; ?></label>
+                                   
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">E-mail:</label>
-                                    <input required type="e-mail" id="email" class="form-control" value="helder@gmail.com">
+                                    <label for="email">E-mail: <?php echo $listaDados[0]->email; ?></label>
+                                    
                                 </div>
                                 <div class="form-group">
-                                    <label for="numero">Número de contato:</label>
-                                    <input required type="tel" id="numero" class="form-control" value="92369546915">
+                                    <label for="numero">Número de contato: <?php echo $listaDados[0]->contato; ?></label>
+                                   
                                 </div>
                                 <div class="form-group">
-                                    <label for="endereco">Endereço:</label>
-                                    <input required type="text" id="endereco" class="form-control" value="Centro">
+                                    <label for="endereco">Endereço: <?php echo $listaDados[0]->endereco; ?></label>
+                                    
                                 </div>
                                 <div class="form-group">
-                                    <label for="cep">CEP:</label>
-                                    <input required type="text" id="cep" class="form-control" value="69042000" pattern= "\d{5}-?\d{3}">
+                                    <label for="cep">CEP: <?php echo $listaDados[0]->cep; ?></label>
+                                   
                                 </div>
-                                <button type="submit" class="btn btn-default ">Alterar</button>
-                            </form>
+                               <a href="<?php echo base_url(); ?>admin/painelAdm/clientes"> <button type="submit" class="btn btn-default ">Voltar</button></a>
+                          
                         </fieldset>
-                        
-                        <fieldset>
-                            <legend>Alteração de senha</legend>
-                            
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="cpf">Digite a nova senha:</label>
-                                    <input required type="password" id="cpf" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Digite novamente a nova senha:</label>
-                                    <input required type="password" id="email" class="form-control" required>
-                                </div>
-                                <button type="submit" class="btn btn-default ">Alterar</button>
-                            </form>
-                        </fieldset>
+                 
                     </div>
 				</div>
 			</div>
 		</div>
 
-<?php include "include-footer.php" ?>

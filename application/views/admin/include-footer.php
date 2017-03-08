@@ -46,7 +46,14 @@
     	 
     });
 
+    $("#Arquivar").click(function(){
 
+          if(confirm("Deseja arquivar este cliente?")){
+            return true;
+          }else{
+            return false;
+          }
+    });
   })
   </script>
   <script type="text/javascript">
