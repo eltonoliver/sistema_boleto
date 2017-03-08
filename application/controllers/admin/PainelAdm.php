@@ -265,14 +265,71 @@ class PainelAdm extends CI_Controller {
 	}
 
 	public function relatorio(){
+		$ano = gmdate('Y');
+		$mesSeguinte = gmdate('m');
+		$dia1MesAtual = $ano."-".$mesSeguinte."-01";
+		$mesSeguinte = $mesSeguinte+1;
+	
+		if($mesSeguinte > 12){
+			$mesSeguinte = 1;
+			$ano = $ano +1;
+		}
+
+		$dia1MesSeguinte = $ano."-".$mesSeguinte."-01";
+
+		$sqlPagosEsteMes    = $this->db->query("SELECT count(boletoId) AS Pagos FROM boleto WHERE dataVencimento>'$dia1MesAtual' AND dataVencimento<'$dia1MesSeguinte' and descricaoBoleto='Pago!' ")->result();
+		$sqlPendentesEsteMes = $this->db->query("SELECT count(boletoId) AS Pendentes FROM boleto WHERE dataVencimento>'$dia1MesAtual' AND dataVencimento<'$dia1MesSeguinte' and descricaoBoleto='Em aberto' ")->result();
+
+		//Calcula a data do dia 1 do mes passado ate o dia 1 do mes atual
+		$mesPassado = gmdate('m');
+		$mesPassado = $mesPassado-1;
+
+		if($mesPassado < 1){
+			$mesPassado = "12";
+			$ano = $ano-1;
+		}
+
+		$dia1MesPassado = $ano."-".$mesPassado."-01";
+
+		$sqlPagosMesPassado = $this->db->query("SELECT count(boletoId) AS Pagos FROM boleto WHERE dataVencimento>'$dia1MesPassado' AND dataVencimento<'$dia1MesAtual' and descricaoBoleto='Pago!' ")->result();
+		$sqlPendentesMesPassado = $this->db->query("SELECT count(boletoId) AS Pendentes FROM boleto WHERE dataVencimento>'$dia1MesPassado' AND dataVencimento<'$dia1MesAtual' and descricaoBoleto='Em aberto' ")->result();
+
+		if( ($sqlPagosEsteMes) and  ($sqlPendentesEsteMes) and  ($sqlPendentesMesPassado) and  ($sqlPagosMesPassado) ){
+
+			$dados['qtdPagosAtual'] 		= $sqlPagosEsteMes[0]->Pagos;
+			$dados['qtdPendentesAtual'] 	= $sqlPendentesEsteMes[0]->Pendentes;
+			$dados['qtdPagosPassado'] 		= $sqlPendentesMesPassado[0]->Pendentes;
+			$dados['qtdPendentesPassado']	= $sqlPagosMesPassado[0]->Pagos;
+			$dados['totalAtual']			= $dados['qtdPagosAtual'] + $dados['qtdPendentesAtual'];
+			$dados['totalPassado']			= $dados['qtdPagosPassado'] + $dados['qtdPendentesPassado'];
+
+			if($dados['totalAtual'] == 0){
+				$dados['porcentagemPagosAtual'] = 0;
+				$dados['porcentagemPendentesAtual'] = 0;
+			} else {
+				$dados['porcentagemPagosAtual'] = $dados['qtdPagosAtual']*100/$dados['totalAtual'];
+				$dados['porcentagemPendentesAtual'] = $dados['qtdPendentesAtual']*100/$dados['totalAtual'];			
+			}
+
+			if($dados['totalPassado'] == 0){
+	 			$dados['porcentagemPendentesPassado'] = 0;
+	 			$dados['porcentagemPagosPassado'] = 0;
+			} else {
+				$dados['porcentagemPagosPassado'] = $dados['qtdPagosPassado']*100/$dados['totalPassado'];
+				$dados['porcentagemPendentesPassado'] = $dados['qtdPendentesPassado']*100/$dados['totalPassado'];			
+			}
+
+		}
+
+
 
 		$this->load->view('admin/include-header');
-		$this->load->view('admin/relatorio');
+		$this->load->view('admin/relatorio',$dados);
 		$this->load->view('admin/include-footer');
 	}
 
 	public function adm(){
-
+		
 		$this->load->view('admin/include-header');
 		$this->load->view('admin/administrador');
 		$this->load->view('admin/include-footer');
