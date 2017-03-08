@@ -257,8 +257,10 @@ class PainelAdm extends CI_Controller {
 
 	public function historico(){
 
+		$dados['listaHistoricoAcesso'] = $this->db->get('historicousuario')->result();
+
 		$this->load->view('admin/include-header');
-		$this->load->view('admin/historico');
+		$this->load->view('admin/historico',$dados);
 		$this->load->view('admin/include-footer');
 	}
 
