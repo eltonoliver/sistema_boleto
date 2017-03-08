@@ -1,4 +1,4 @@
-<?php include "include-header.php" ?>
+
 
 		<div class="container-fluid" id="relatorio">
 			<div class="row">
@@ -15,7 +15,7 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h2>Resumo dos boletos deste mês e mês anterior</h2>
 					
-					<table class="table table-hover">
+					<table class="table table-hover" id="form-admin">
 						<thead>
 							<th>BOLETOS/PERÍODO</th>
 							<th>MÊS ATUAL</th>
@@ -23,18 +23,18 @@
 						</thead>
 						<tr>
 							<td>PAGOS</td>
-							<td>308 (100 %)</td>
-							<td>0 (0 %)</td>
+							<td><?php echo $qtdPagosAtual; ?> <?php echo "(".substr($porcentagemPagosAtual ,0,4)." %)"; ?></td>
+							<td><?php echo $qtdPagosPassado; ?>  <?php echo "(".substr($porcentagemPagosPassado ,0,4)." %)"; ?></td>
 						</tr>
 						<tr>
 							<td>PENDENTES</td>
-							<td>308 (100 %)</td>
-							<td>0 (0 %)</td>
+							<td><?php echo $qtdPendentesAtual; ?><?php echo "(".substr($porcentagemPendentesAtual ,0,4)." %)"; ?></td>
+							<td><?php echo $qtdPendentesPassado; ?><?php echo "(".substr($porcentagemPendentesPassado ,0,4)." %)"; ?></td>
 						</tr>
 						<tr>
 							<td>TOTAL</td>
-							<td>308 (100 %)</td>
-							<td>0 (0 %)</td>
+							<td><?php echo $totalAtual; ?></td>
+							<td><?php echo $totalPassado; ?></td>
 						</tr>
 						
 						
@@ -44,4 +44,3 @@
 			</div>
 		</div>
 
-<?php include "include-footer.php" ?>
