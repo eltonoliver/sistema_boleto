@@ -38,8 +38,16 @@
                                 <input required type="password" id="senha" class="form-control" value="<?php echo $listaAdmin[0]->senha; ?>" name="senha">
                             </div>
                             <div class="form-group">
-                                <label for="dsenha">Digite novamente a senha:</label>
+                            <label for="dsenha">Digite novamente a senha:</label>
+                            <?php if(empty($listaAdmin[0]->email)){ ?>
+                                
                                 <input required type="password" id="dsenha" class="form-control" name="confSenha">
+                            <?php }else{
+                                ?>
+                                <input type="password" id="dsenha" class="form-control" name="confSenha">
+                                <?php
+
+                                } ?>    
                             </div>
                         </div>
                         <div class="col-md-6">

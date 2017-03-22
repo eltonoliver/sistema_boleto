@@ -151,7 +151,7 @@ class PainelAdm extends CI_Controller {
 	public function sair(){
 
 		$this->session->sess_destroy();
-		redirect('/Login');
+		redirect('login-admin');
 	}
 
 	public function manipulaArquivo(){

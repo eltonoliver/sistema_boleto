@@ -10,6 +10,9 @@
 				<form action="<?php echo base_url(); ?>login/validaLogin/" class="boxfor" method="post">
 					<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nome do usuário ou e-mail" required="required" name="usuario">
 					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" required="required" name="senha">
+					<input type="hidden" name="uri" value="<?php echo $this->uri->segment(1); ?>">
+
+					
 					<button type="submit" class="btn btn-default btnlog">Entrar</button>
 				</form>
 				

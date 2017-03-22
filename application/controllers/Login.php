@@ -11,6 +11,7 @@ class Login extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+		error_reporting(0);
 		$this->load->helper("funcoes");
 	}
 	public function index()
@@ -88,6 +89,8 @@ class Login extends CI_Controller {
 	
 	public function validaLogin(){
 
+		$uriAdmin = $this->input->post('uri');
+		
 		$login = strtolower(strip_tags($this->input->post('usuario')));
 		$email = $login;
 		$cpfCnpj = str_pad(cb_limparLogin($login), 14, "0", STR_PAD_LEFT);
@@ -99,13 +102,15 @@ class Login extends CI_Controller {
 		$this->db->where('login',$login);
 		$queryLogin = $this->db->get('usuarioAdmin')->result();
 
-		if (!empty($queryLogin[0]->email)) {
+		if ($uriAdmin == "admin") {
+			$verificaLogin = strpos($login, '@');
 			// é administrador
 
 			//	$this->db->where('usuarioId',$_SESSION['userId']);
 			//	$verificaStatusSenha = $this->db->get('usuario')->result();
+			if($verificaLogin == false){
+					$resultado = $this->db->query("SELECT adminId, nome, login FROM usuarioAdmin WHERE login LIKE '$login' AND senha LIKE '$senha'");
 
-			if ($resultado = $this->db->query("SELECT adminId, nome, login FROM usuarioAdmin WHERE login LIKE '$login' AND senha LIKE '$senha'")){
 				if($resultado->result()){
 
 					foreach ($resultado->result() as $value) {
@@ -126,9 +131,41 @@ class Login extends CI_Controller {
 					$this->session->set_flashdata('msg', 'Erro nos dados de entrada!');
 					cb_boletoHistoricoInsert($login, "Admin: Identifição de admin falhou", '0');
 				
-					redirect('Login/');
+					redirect('login-admin/');
 				}
-			} 
+			}else{
+				$senha = md5($senha);
+
+				$resultado = $this->db->query("SELECT adminId, nome,email FROM usuarioAdmin WHERE email LIKE '$login' AND senha LIKE '$senha'");
+
+				if($resultado->result()){
+
+					foreach ($resultado->result() as $value) {
+							
+							$adminId = (isset($value->adminID)?$value->adminID:"");
+							$_SESSION['nome'] = $value->nome;
+							$_SESSION['admin'] = $value->email;
+
+						}	
+						
+						
+						cb_boletoHistoricoInsert($login, "Admin: Acesso", $adminId);
+
+						redirect('admin/PainelAdm');
+
+							
+						
+				} else {	
+
+					$this->session->set_flashdata('msg', 'Erro nos dados de entrada!');
+					cb_boletoHistoricoInsert($login, "Admin: Identifição de admin falhou", '0');
+				
+					redirect('login-admin');
+				}
+			}
+
+			
+			
 		} else {
 			// é cliente
 			
