@@ -62,6 +62,15 @@
             return false;
           }
     });
+
+     $(".deletarAdmin").click(function(){
+
+          if(confirm("Deseja deletar este usuário?")){
+            return true;
+          }else{
+            return false;
+          }
+    });
   })
   </script>
   <script type="text/javascript">

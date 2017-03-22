@@ -329,10 +329,184 @@ class PainelAdm extends CI_Controller {
 	}
 
 	public function adm(){
-		
+		$dados['listaAdmin'] = $this->db->get('usuarioadmin')->result();	
 		$this->load->view('admin/include-header');
-		$this->load->view('admin/administrador');
+		$this->load->view('admin/administrador',$dados);
 		$this->load->view('admin/include-footer');
+	}
+
+	public function addAdmin(){
+
+		$this->load->view('admin/include-header');
+		$this->load->view('admin/add-admin');
+		$this->load->view('admin/include-footer');	
+	}
+
+	public function cadastraAdmin(){
+
+	
+		$nome 		= $this->input->post('nome');
+		$email 		= $this->input->post('email');
+		$nContato 	= $this->input->post('contato');
+		$senha		= $this->input->post('senha');
+		$confSenha  = $this->input->post('confSenha');
+		$permissoes = $this->input->post('adm');
+
+		
+		if($senha == $confSenha){
+
+			if(!empty($email) && !empty($senha) && !empty($nome)){
+
+				if(count($permissoes)<=0){
+
+					$this->session->set_flashdata('erro', 'Você precisa selecionar no mínimo permissão');
+					$this->session->set_flashdata('nome', $nome);
+					$this->session->set_flashdata('email',$email);
+					$this->session->set_flashdata('contato',$nContato);
+					redirect('admin/PainelAdm/addAdmin/');
+
+				}else{
+					$data = array(
+	       				 'nome' => $nome,
+	       				 'senha' => md5($senha),
+	       				 'email' => $email,
+	       				 'contato' => $nContato
+					);
+
+					$this->db->insert('usuarioadmin', $data);
+					$id = $this->db->insert_id();
+					for($i = 0 ; $i < count($permissoes); $i++){
+
+						$data = array(
+		       				 
+		       				 'id_permissao' => $permissoes[$i],
+		       				 'id_usuadmin' => $id
+						);
+
+						$this->db->insert('permissao_admin', $data);
+					}	
+
+					
+
+
+					$this->session->set_flashdata('msg', 'Dados Cadastrados com sucesso!');
+					redirect('admin/PainelAdm/addAdmin/');
+				}	
+
+			}else{
+
+				
+					$this->session->set_flashdata('msg', 'E-mail, Senha e Nome São Obrigatórios!');
+					redirect('admin/PainelAdm/addAdmin/');
+				
+			}
+
+		}else{
+
+			
+				$this->session->set_flashdata('msg', 'Digite a mesma senha nos dois campos!');
+				redirect('admin/PainelAdm/addAdmin/');
+			
+		}
+
+
+	}
+
+	public function editarAdmin($id){
+		$this->db->where('adminId',$id);
+		$dados['listaAdmin'] = $this->db->get('usuarioadmin')->result();
+
+		$this->db->where('id_usuadmin',$id);
+		$dados['listaPermissao'] = $this->db->get('permissao_admin')->result();
+
+		$this->load->view('admin/include-header');
+		$this->load->view('admin/edit-admin',$dados);
+		$this->load->view('admin/include-footer');	
+	}
+
+	public function editarInforAdm($idAdmin){
+
+		$nome 		= $this->input->post('nome');
+		$email 		= $this->input->post('email');
+		$nContato 	= $this->input->post('contato');
+		$senha		= $this->input->post('senha');
+		$confSenha  = $this->input->post('confSenha');
+		$permissoes = $this->input->post('adm');
+
+		if($senha == $confSenha){
+
+			if(!empty($email) && !empty($senha) && !empty($nome)){
+
+				if(count($permissoes)<=0){
+
+					$this->session->set_flashdata('erro', 'Você precisa selecionar no mínimo permissão');
+					$this->session->set_flashdata('nome', $nome);
+					$this->session->set_flashdata('email',$email);
+					$this->session->set_flashdata('contato',$nContato);
+					redirect('admin/PainelAdm/editarAdmin/'.$idAdmin);
+
+				}else{
+					$data = array(
+	       				 'nome' => $nome,
+	       				 'senha' => md5($senha),
+	       				 'email' => $email,
+	       				 'contato' => $nContato
+					);
+					$this->db->where('id_usuadmin',$idAdmin);
+					$this->db->delete('permissao_admin');
+
+					$this->db->where('adminId', $idAdmin);
+					$this->db->update('usuarioadmin', $data);
+	
+					for($i = 0 ; $i < count($permissoes); $i++){
+
+						$data = array(
+		       				 
+		       				 'id_permissao' => $permissoes[$i],
+		       				 'id_usuadmin' => $idAdmin
+						);
+
+						$this->db->insert('permissao_admin', $data);
+					}	
+
+					
+
+
+					$this->session->set_flashdata('msg', 'Dados Alterados com sucesso!');
+					redirect('admin/PainelAdm/editarAdmin/'.$idAdmin);
+				}	
+
+			}else{
+
+				
+					$this->session->set_flashdata('msg', 'E-mail, Senha e Nome São Obrigatórios!');
+					redirect('admin/PainelAdm/editarAdmin/'.$idAdmin);
+				
+			}
+
+		}else{
+
+			
+				$this->session->set_flashdata('msg', 'Digite a mesma senha nos dois campos!');
+				redirect('admin/PainelAdm/editarAdmin/'.$idAdmin);
+			
+		}
+
+	}
+
+	public function deleteAdmin($id){
+			/*DELETA AS PERMISSOES*/
+			$this->db->where('id_usuadmin',$id);
+			$this->db->delete('permissao_admin');
+
+
+		   $this->db->where('adminId',$id);
+		if($this->db->delete('usuarioadmin')){
+			
+			$this->session->set_flashdata('msg', 'Usuário Excluído com Sucesso!');
+			redirect('admin/PainelAdm/adm/');
+		}
+
 	}
 
 	public function processaBoleto($boleto,$boletoID,$nossoNumero){

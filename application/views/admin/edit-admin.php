@@ -1,4 +1,3 @@
-<?php include "include-header.php" ?>
 
 		<div class="container-fluid" id="administrador">
 			<div class="row">
@@ -20,23 +19,23 @@
                            <?php if(!empty($this->session->flashdata('erro'))){ ?>
                          <div class="alert alert-warning" role="alert"><?php echo $this->session->flashdata('erro'); ?></div>
                          <?php } ?>
-                    <form action="<?php echo base_url(); ?>admin/PainelAdm/cadastraAdmin" method="post">
+                    <form action="<?php echo base_url(); ?>admin/PainelAdm/editarInforAdm/<?php echo $listaAdmin[0]->adminId; ?>" method="post">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nome">Seu nome completo: </label>
-                                <input required type="text" id="nome" class="form-control text-uppercase" name="nome" value="<?php echo $this->session->flashdata('nome'); ?>">
+                                <label for="nome">Seu nome completo:</label>
+                                <input required type="text" id="nome" class="form-control text-uppercase" value="<?php echo $listaAdmin[0]->nome; ?>" name="nome">
                             </div>
                             <div class="form-group">
                                 <label for="email">E-mail:</label>
-                                <input required type="e-mail" id="email" class="form-control" name="email" value="<?php echo $this->session->flashdata('email'); ?>">
+                                <input required type="e-mail" id="email" class="form-control" value="<?php echo $listaAdmin[0]->email; ?>" name="email">
                             </div>
                             <div class="form-group">
                                 <label for="numero">Número de contato:</label>
-                                <input required type="tel" id="numero" class="form-control" name="contato" value="<?php echo $this->session->flashdata('contato'); ?>">
+                                <input required type="tel" id="numero" class="form-control" value="<?php echo $listaAdmin[0]->contato; ?>" name="contato">
                             </div>
                             <div class="form-group">
                                 <label for="senha">Senha:</label>
-                                <input required type="password" id="senha" class="form-control" name="senha">
+                                <input required type="password" id="senha" class="form-control" value="<?php echo $listaAdmin[0]->senha; ?>" name="senha">
                             </div>
                             <div class="form-group">
                                 <label for="dsenha">Digite novamente a senha:</label>
@@ -52,16 +51,49 @@
                                 </div>
                                 <!--
                                 <label class="checkbox">
-                                    <input type="checkbox" id="inlineCheckbox1" value="option1"> Adicionar cliente
+                                    <input type="checkbox" id="inlineCheckbox1" value="option1" checked> Adicionar cliente
                                 </label>-->
+                              
                                 <label class="checkbox">
-                                    <input type="checkbox" id="inlineCheckbox2" value="1" name="adm[]"> Adicionar administrador 
+                                    <input type="checkbox" id="inlineCheckbox2" name="adm[]" value="1"
+                                    <?php 
+
+                                        foreach ($listaPermissao as $value) {
+                                            if($value->id_permissao == 1){
+                                                echo "checked";
+                                            }
+                                        }
+
+                                    ?>
+                                    > Adicionar administrador 
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" id="inlineCheckbox3" value="2" name="adm[]"> Arquivamento de cliente
+                                    <input type="checkbox" id="inlineCheckbox3" name="adm[]" value="2"
+                                     <?php 
+
+                                        foreach ($listaPermissao as $value) {
+                                            if($value->id_permissao == 2){
+                                                echo "checked";
+                                            }
+                                        }
+
+                                    ?>
+                                    > Arquivamento de cliente
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" id="inlineCheckbox4" value="3" name="adm[]"> Envio de arquivo/boleto
+                                    <input type="checkbox" id="inlineCheckbox4" name="adm[]" value="3"
+                                    <?php 
+
+                                        foreach ($listaPermissao as $value) {
+                                            if($value->id_permissao == 3){
+                                                echo "checked";
+                                            }
+                                        }
+
+                                    ?>
+                                   
+
+                                    > Envio de arquivo/boleto
                                 </label>
   
                             </div>
@@ -69,10 +101,11 @@
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-default">Salvar</button>
                         </div>
+                     
+                
                     </form>
 					
 				</div>
 			</div>
 		</div>
 
-<?php include "include-footer.php" ?>
