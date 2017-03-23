@@ -114,10 +114,11 @@ class Login extends CI_Controller {
 				if($resultado->result()){
 
 					foreach ($resultado->result() as $value) {
-							
-							$adminId = (isset($value->adminID)?$value->adminID:"");
+						
+							$adminId = (isset($value->adminId)?$value->adminId:"");
 							$_SESSION['nome'] = $value->nome;
 							$_SESSION['admin'] = $value->login;
+							$_SESSION['idAdmin'] = $value->adminId;
 
 						}	
 					
@@ -131,7 +132,7 @@ class Login extends CI_Controller {
 					$this->session->set_flashdata('msg', 'Erro nos dados de entrada!');
 					cb_boletoHistoricoInsert($login, "Admin: Identifição de admin falhou", '0');
 				
-					redirect('login-admin/');
+					redirect('admin/');
 				}
 			}else{
 				$senha = md5($senha);
@@ -142,9 +143,10 @@ class Login extends CI_Controller {
 
 					foreach ($resultado->result() as $value) {
 							
-							$adminId = (isset($value->adminID)?$value->adminID:"");
+							$adminId = (isset($value->adminId)?$value->adminId:"");
 							$_SESSION['nome'] = $value->nome;
 							$_SESSION['admin'] = $value->email;
+							$_SESSION['idAdmin'] = $value->adminId;
 
 						}	
 						
@@ -160,7 +162,7 @@ class Login extends CI_Controller {
 					$this->session->set_flashdata('msg', 'Erro nos dados de entrada!');
 					cb_boletoHistoricoInsert($login, "Admin: Identifição de admin falhou", '0');
 				
-					redirect('login-admin');
+					redirect('admin');
 				}
 			}
 

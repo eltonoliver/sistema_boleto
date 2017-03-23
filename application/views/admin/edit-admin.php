@@ -50,6 +50,23 @@
                                 } ?>    
                             </div>
                         </div>
+                        <?php 
+                                 $this->db->where('id_usuadmin',$_SESSION['idAdmin']);
+                        $query = $this->db->get('permissao_admin')->result();
+
+
+                        $qtdPermissao = count($query);
+
+                        for ($i=0; $i < $qtdPermissao ; $i++ ) {
+
+                            if($query[$i]->id_permissao == 1){
+
+                                $liberado = true;
+
+                            }
+                        }
+                    ?>
+                    <?php if($liberado){ ?>
                         <div class="col-md-6">
                             <div class="panel panel-default paneldefaul">
                                 <!-- Default panel contents -->
@@ -106,6 +123,7 @@
   
                             </div>
                         </div>
+                        <?php } ?>
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-default">Salvar</button>
                         </div>

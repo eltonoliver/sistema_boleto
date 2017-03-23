@@ -14,11 +14,31 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h2>Lista de administadores</h2>
                     <div class="alert alert-warning" role="alert">Todos os administradores deveram acessar sistema com seu e-mail cadastrado e senha.</div>
-					<a href="<?php echo base_url(); ?>admin/PainelAdm/addAdmin"  class="btn btn-success" style="margin-bottom: 10px;">Cadastrar novo funcionário</a>
+
+                    <?php 
+                    			 $this->db->where('id_usuadmin',$_SESSION['idAdmin']);
+                    	$query = $this->db->get('permissao_admin')->result();
+
+
+                    	$qtdPermissao = count($query);
+
+                    	for ($i=0; $i < $qtdPermissao ; $i++ ) {
+
+                    		if($query[$i]->id_permissao == 1){
+
+                    			$liberado = true;
+
+                    		}
+                    	}
+                    ?>
+
+					<?php if($liberado){ ?>	
+                    <a href="<?php echo base_url(); ?>admin/PainelAdm/addAdmin"  class="btn btn-success" style="margin-bottom: 10px;">Cadastrar novo funcionário</a>
+                    <?php } ?>
 					<table class="table table-hover" id="form-admin">
 						<thead>
 							<th>Nome do administrador</th>
-							<th>contato@gmail.com</th>
+							<th>E-mail</th>
 							<th>MENU</th>
 						</thead>
 					<?php foreach ($listaAdmin as $value) { ?>
