@@ -427,12 +427,40 @@ class PainelAdm extends CI_Controller {
 
 			if(!empty($email) && !empty($nome)){
 
-				$data = array(
+			 try{
+
+			 		if(!empty($confSenha)){
+
+			 			if($senha == $confSenha){
+
+			 				$data = array(
+		       				 'nome' => $nome,
+		       				 'senha' => md5($senha),
+		       				 'email' => $email,
+		       				 'contato' => $nContato
+							);
+
+			 			}else{
+
+			 					$this->session->set_flashdata('erro', 'A confirmação de senha está diferente da senha!');
+								redirect('admin/PainelAdm/editarAdmin/'.$idAdmin);
+			 			}
+			 		}else{
+
+			 			$data = array(
 	       				 'nome' => $nome,
-	       				 'senha' => md5($senha),
 	       				 'email' => $email,
 	       				 'contato' => $nContato
 					);
+			 		}	
+
+			 }catch(Exception $e){
+
+
+
+			 }		
+				
+
 					$this->db->where('id_usuadmin',$idAdmin);
 					$this->db->delete('permissao_admin');
 

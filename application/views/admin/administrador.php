@@ -41,20 +41,43 @@
 							<th>E-mail</th>
 							<th>MENU</th>
 						</thead>
-					<?php foreach ($listaAdmin as $value) { ?>
-						
-				
-						<tr>
-							<td><?php echo $value->nome ?></td>
-							<td><?php echo $value->email ?></td>
-							<td>
-								<a class="glyphicon glyphicon-edit" title="Editar" href="<?php echo base_url(); ?>admin/PainelAdm/editarAdmin/<?php echo $value->adminId; ?>"></a>
-								<a class="glyphicon glyphicon-remove-sign deletarAdmin" title="Excluir" href="<?php echo base_url(); ?>admin/PainelAdm/deleteAdmin/<?php echo $value->adminId; ?>"></a>
-							</td>
-						</tr>
-						
+					<?php if($liberado){ ?>	
+						<?php foreach ($listaAdmin as $value) { ?>
+							
+					
+							<tr>
+								<td><?php echo $value->nome ?></td>
+								<td><?php echo $value->email ?></td>
+								<td>
+									<a class="glyphicon glyphicon-edit" title="Editar" href="<?php echo base_url(); ?>admin/PainelAdm/editarAdmin/<?php echo $value->adminId; ?>"></a>
+									<a class="glyphicon glyphicon-remove-sign deletarAdmin" title="Excluir" href="<?php echo base_url(); ?>admin/PainelAdm/deleteAdmin/<?php echo $value->adminId; ?>"></a>
+								</td>
+							</tr>
+							
+						<?php } ?>	
+					 <?php }else{
+
+					 			$this->db->where('adminId',$_SESSION['idAdmin']);
+					 			$query = $this->db->get('usuarioadmin')->result();
+
+					 		 ?>	
+							<?php foreach ($query as $value) { ?>
+							
+					
+							<tr>
+								<td><?php echo $value->nome ?></td>
+								<td><?php echo $value->email ?></td>
+								<td>
+									<a class="glyphicon glyphicon-edit" title="Editar" href="<?php echo base_url(); ?>admin/PainelAdm/editarAdmin/<?php echo $value->adminId; ?>"></a>
+								
+								</td>
+							</tr>
+							
+						<?php } ?>	
+
+
+
 					<?php } ?>	
-						
 					</table>
 					
 				</div>
